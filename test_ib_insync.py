@@ -54,6 +54,8 @@ ib.qualifyContracts(spx)
 
 chains = ib.reqSecDefOptParams(spx.symbol, '', spx.secType, spx.conId)
 
+
+
 util.df(chains)
 
 ##############à SEZIONE PANDAS #####################################
@@ -98,7 +100,7 @@ if catena_opzioni.exchange.count():
     matrice_contratti = pd.DataFrame(columns=('borsa', 'idSottostante', 'cod_TradingClass','moltiplicatore', 'scadenza','strike'))
     for scadenza in elenco_scadenze:
         for strike in elenco_strikes:
-            matrice_contratti = matrice_contratti.append({'borsa': borsa, 'idSottostante': idSottostante, 'cod_tradingClass': cod_tradingClass, 'motliplicatore': motliplicatore, 'scadenza': scadenza, 'strike': strike  }, ignore_index=True)
+            matrice_contratti = matrice_contratti.append({'borsa': borsa, 'idSottostante': str(idSottostante), 'cod_tradingClass': str(cod_tradingClass), 'motliplicatore': motliplicatore, 'scadenza': scadenza, 'strike': strike  }, ignore_index=True)
    
     matrice_contratti.to_html('matrice_contratti.html')
 else:
