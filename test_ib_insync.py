@@ -18,10 +18,10 @@ import numpy as np
 
 #PARAMETRI CONNESSIONE
 accountName = "DU247692"
-host = "151.80.45.44"                     
-# host = "" # Se vuoi usare local host lascia il campo vuoto
+# host = "151.80.45.44"                     
+host = "" # Se vuoi usare local host lascia il campo vuoto
 port = 7496
-clientId = 7
+clientId = 8
 
 #CONNESSIONE
 ib = IB()

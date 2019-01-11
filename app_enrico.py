@@ -47,62 +47,60 @@ def disconnessione():
     return ib.disconnect()
 
     
+def printGui(messaggio = ""):
     
-def formatta_istruzioni_parametro(codice, comando, descrizione):
-    
-    
-    stringa_istruzione = str(codice) + '\t' + str(comando) + '\t\t'  + str(descrizione) + '\n'
-    
-    return stringa_istruzione
-
-
-def printGui(messaggio = "", altezza_logo = 25):
-    
-    print('\n' * (altezza_logo * 2))
-    print('##############################################################################')
+    print('\n\n##############################################################################')
     print('#####         I N T E R A C T I V E   B R O K E R   C L I E N T          #####')
     print('##############################################################################')
-    print(('\n' * 2) + messaggio )
-    print("\n" * (altezza_logo - len(messaggio.split('\n'))))
-
+    guidainlinea()
+          
+def guidainlinea():
     
+    print("\n### ISTRIZIONI COMANDI\n\n")
+    
+    print("cerca\t\t effetua ricerca del ticker IB")
+    print("autore\t\t Riferimento e contatti autore")
+    print("exit\t\t Per terminare il programma")    
+    
+    print("\n")
 
-def main():
-    #printGui("1) - Test Connessione alla TWS")
-    if len(sys.argv) == 1 and tagSviluppo == 'NO':
-        messaggio = formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('', '  COMANDO','\t       DESCRIZIONE') 
-        messaggio += formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('', '','') 
-        messaggio += formatta_istruzioni_parametro(1,'-testConn', 'Fa una connessione di test alla TWS')
-        messaggio += formatta_istruzioni_parametro(2,'-autore', '\tContatti dello sviluppatore')        
-        printGui(messaggio)
-        #cancellare la condizione tag sviluppo
-    elif ( tagSviluppo == 'SI' or str(sys.argv[1]) == '-testConn'  or (str(sys.argv[1]) == '1')):    
-        messaggio = formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('', '  AZIONE','\t       DESCRIZIONE') 
-        messaggio += formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('','CONNESSIONE', 'Connessione alla TWS in corso')
-        messaggio += formatta_istruzioni_parametro('','Risposta', str(connessione()))
-        messaggio += formatta_istruzioni_parametro('','DISCONNESSIONE', 'Disconnessione dlla TWS in corso')
-        messaggio += formatta_istruzioni_parametro('','Risposta', str(disconnessione()))
-        
-        
+def autore():
+    print("\n\n\nEnrico Alterani e.alterani@gmail.com\n\nSabino Delfino sabino.bt@gmail.com\n\n")
 
-        printGui(messaggio)
-        
-    elif ((str(sys.argv[1]) == '-autore') or(str(sys.argv[1]) == '2')):
-        messaggio = '* * *  A U T O R E  * * *\n\n\n \nNOME:   ENRICO ALTERANI \n\nMAIL:   e.alterani@gmail.com\n\nTEL:   +39 329 88.37.557\n\nGitHub:   https://github.com/alterani'
-        printGui(messaggio)
+def cerca():
+    print("funzione cerca non ancora implementata")
+
+
+def main(val_input=""):
+    
+    printGui()
+    
+    print(str(connessione()) + "\n")
+    
+    if(val_input == "autore"):
+        autore()
+    elif(val_input == "cerca"):
+       cerca()
+    elif(val_input == "exit" or val_input == "" ):
+        pass
     else:
-        messaggio = formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('', '  ERRORE','\t       DESCRIZIONE') 
-        messaggio += formatta_istruzioni_parametro('\t-------------', '\t---------------------------------------------','')
-        messaggio += formatta_istruzioni_parametro('','NO PARAM', 'Parametro  "' + str(sys.argv[1]) + '"  non è valido. Inserisci un parametro cotrretto' )
+        print("Il comando \"" + val_input +"\" non esiste!")
+    
+    
+    disconnessione()
+    
+    
+    if(val_input != "exit"):
+        main(str(input("\n\n\n SCRIVI COMANDO....")))
+    else:
+        print("\n\n\nProgramma terminato correttamente!!\n\n\n")
         
-        printGui(messaggio)
+    
+        
+   
      
 if (__name__=='__main__'):
+    
     main()
 #printGui(str(sys.argv[1]))
 
